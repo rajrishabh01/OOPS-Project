@@ -1,0 +1,105 @@
+#include<iostream>
+
+
+using namespace std;
+
+const int m=50;
+
+class item{
+    private :
+        int itemcode[m];
+        float itemprice[m];
+        int pcount;
+        static int ncount;
+
+    public :
+        void CNT(void){pcount=0;}
+        void writedata(void);
+        void displaydata(void);
+        void removedata(void);
+        void totalvalue(void);
+        void getncount(void);
+
+};
+int item::ncount=0;
+void item::getncount(void){
+    cout << "The count is : " << ncount << endl;
+
+
+}
+void item::writedata(void){
+    cout << "Enter the code: "<< endl;
+    cin >> itemcode[pcount];
+    cout << "Enter the price: "<<endl;
+    cin >> itemprice[pcount];
+    ncount++;
+    pcount++;
+}
+
+void item::displaydata(void){
+    cout << "Code     Price" << endl;
+
+    for(int i=0;i<=pcount;i++)    {
+        cout <<"\n" << itemcode[i];
+        cout << "     " << itemprice[i]<< endl;
+    }
+    cout << endl;
+}
+
+void item :: removedata(void){
+    int a;
+    cout << "\n Enter the code of the object to be removed : " << endl;
+    cin >> a;
+
+    for(int i=0;i<pcount;i++)
+    {
+        if(itemcode[i]==a)
+        {
+            itemprice[i]=0;
+        }
+    }
+
+}
+
+void item::totalvalue(void){
+    float sum=0;
+
+    for(int i=0;i<pcount;i++)
+    {
+            sum += itemprice[i];
+    }
+    cout << "The total value is: " << sum << endl;
+}
+
+
+int main()
+{
+    item ORDER;
+    ORDER.CNT();
+
+    int x;
+
+    do
+    {
+        cout << "Enter the code for the following Options: " << endl;
+        cout << "1. To add items." << endl;
+        cout << "2. To display items." << endl;
+        cout << "3. To remove data. " << endl;
+        cout << "4. To display total value. " << endl;
+        cout << "Your choice : " ;
+        cin >> x;
+        ORDER.getncount();
+
+        switch(x)
+        {
+        case 1:ORDER.writedata();break;
+        case 2:ORDER.displaydata();break;
+        case 3:ORDER.removedata();break;
+        case 4:ORDER.totalvalue();break;
+        default : cout << "try again.";
+
+        }
+
+    }while(x!=5);
+
+}
